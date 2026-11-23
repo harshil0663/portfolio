@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* ---------- Theme tokens: dark (default) & light ---------- */
+:root {
+  --bg: #07080d;
+  --fg: #eceef5;
+  --glass: rgba(13, 15, 24, 0.72);
+  --on-accent: #000;
+  --accent: #e62429;
+  --accent2: #2d5bff;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f2ea;
+  --fg: #12141c;
+  --glass: rgba(255, 255, 255, 0.72);
+  --on-accent: #fff;
+  --accent: #c8102e;
+  --accent2: #1f4bd8;
+}
+
+/* ---------- Hero zones: each section sets its own accent ---------- */
+[data-hero="spider"]  { --accent: #e62429; --accent2: #2d5bff; }
+[data-hero="cap"]     { --accent: #2b6bff; --accent2: #e62429; }
+[data-hero="strange"] { --accent: #ff9a1f; --accent2: #ffd166; }
+[data-hero="thor"]    { --accent: #4cc9ff; --accent2: #ffd23f; }
+
+:root[data-theme="light"] [data-hero="spider"]  { --accent: #c8102e; --accent2: #1f4bd8; }
+:root[data-theme="light"] [data-hero="cap"]     { --accent: #1f56d6; --accent2: #c8102e; }
+:root[data-theme="light"] [data-hero="strange"] { --accent: #d1620a; --accent2: #b8860b; }
+:root[data-theme="light"] [data-hero="thor"]    { --accent: #0a86bd; --accent2: #b88a00; }
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
+  --color-on-accent: var(--on-accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bangers);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Theme toggle icons */
+:root[data-theme="light"] .theme-moon,
+:root[data-theme="dark"] .theme-sun {
+  display: none;
+}
+
+/* Comic-book display text */
+.comic-text {
+  font-family: var(--font-display), Impact, sans-serif;
+  letter-spacing: 0.04em;
+  text-shadow:
+    3px 3px 0 var(--accent),
+    6px 6px 0 color-mix(in srgb, var(--accent2) 70%, transparent);
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.halftone {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 55%, transparent) 1.4px,
+    transparent 1.8px
+  );
+  background-size: 16px 16px;
+}
+
+/* A section "zone": glow + halftone dots in that hero's colours */
+.zone {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(color-mix(in srgb, var(--accent) 9%, transparent) 1.3px, transparent 1.8px) 0 0 / 18px 18px,
+    radial-gradient(ellipse at 0% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 55%);
+}
+
+/* Animations */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes spin-rev  { to { transform: rotate(-360deg); } }
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px var(--accent)); }
+  50% { filter: drop-shadow(0 0 26px var(--accent)); }
+}
+
+.spin-slow   { animation: spin-slow 40s linear infinite; transform-origin: center; transform-box: fill-box; }
+.spin-medium { animation: spin-slow 22s linear infinite; transform-origin: center; transform-box: fill-box; }
+.spin-rev    { animation: spin-rev 30s linear infinite; transform-origin: center; transform-box: fill-box; }
+.bob         { animation: bob 4s ease-in-out infinite; }
+.pulse-glow  { animation: pulse-glow 3s ease-in-out infinite; }
+
+.orbit-ring { animation: spin-slow var(--dur, 50s) linear infinite; }
+.orbit-ring.rev { animation-direction: reverse; }
+.orbit-item { animation: spin-rev var(--dur, 50s) linear infinite; }
+.orbit-ring.rev .orbit-item { animation-direction: reverse; }
+.orbit-wrap:hover .orbit-ring,
+.orbit-wrap:hover .orbit-item { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
