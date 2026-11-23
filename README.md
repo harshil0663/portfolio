@@ -1,4 +1,4 @@
-﻿# Harshil Patel — Developer Portfolio
+# Harshil Patel — Developer Portfolio
 
 A Marvel-themed developer portfolio built with **Next.js**, **Tailwind CSS**, **Framer Motion** and **Three.js** (react-three-fiber).
 

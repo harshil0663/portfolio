@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a0b12"/>
+      <stop offset="1" stop-color="#07080d"/>
+    </linearGradient>
+    <clipPath id="tile"><rect width="64" height="64" rx="14"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <g clip-path="url(#tile)">
+    <!-- spider web in the top-right corner -->
+    <g fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="0.9" stroke-linecap="round">
+      <path d="M64 0 L28 0 M64 0 L33 14 M64 0 L46 31 M64 0 L64 36"/>
+      <path d="M52 0 Q54 8 64 12"/>
+      <path d="M40 0 Q43 14 64 24"/>
+      <path d="M52 0 Q54 8 64 12 M40 0 Q43 14 64 24"/>
+    </g>
+    <!-- bottom stripe: red / blue -->
+    <rect y="58" width="64" height="3" fill="#e62429"/>
+    <rect y="61" width="64" height="3" fill="#2d5bff"/>
+  </g>
+  <!-- HP monogram with comic offset shadows -->
+  <g transform="translate(0 -1) skewX(-9) translate(5 0)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7.5">
+    <g id="hp" transform="translate(3.2 3.2)" stroke="#2d5bff">
+      <path d="M13 19 V43 M29 19 V43 M13 31 H29"/>
+      <path d="M38 43 V19 H46 A7.5 7.5 0 0 1 46 34 H38"/>
+    </g>
+    <g transform="translate(1.6 1.6)" stroke="#e62429">
+      <path d="M13 19 V43 M29 19 V43 M13 31 H29"/>
+      <path d="M38 43 V19 H46 A7.5 7.5 0 0 1 46 34 H38"/>
+    </g>
+    <g stroke="#ffffff">
+      <path d="M13 19 V43 M29 19 V43 M13 31 H29"/>
+      <path d="M38 43 V19 H46 A7.5 7.5 0 0 1 46 34 H38"/>
+    </g>
+  </g>
+</svg>
